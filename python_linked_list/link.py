@@ -82,7 +82,81 @@ class LinkedList:
             temp = temp.next
 
         return temp.value
+    def detect_cycle(self):
+        slow = self.head
+        fast = self.head
 
+        while(slow is not None and fast.next is not None):
+            slow = slow.next
+            fast = fast.next.next
+            if(slow == fast):
+                return True
+
+        return False
+
+
+
+    def make_cycle(self, pos):
+        # go to this pos
+        temp = self.head
+        tail = self.head
+        while tail.next is not None :
+            tail = tail.next
+        for i in range (pos):
+            temp = temp.next
+
+        tail.next = temp
+
+
+
+
+    def remove_cycle(self):
+        slow = self.head
+        fast = self.head
+
+        while(slow is not None and fast.next is not None):
+            slow = slow.next
+            fast = fast.next.next
+            if(slow == fast):
+                fast = self.head
+                print(slow.value, "slow er value ")
+
+                while(slow.next is not fast.next):
+                    slow = slow.next
+                    fast = fast.next
+                print(slow.value, fast.value , "meet point to give null")
+                slow.next = None
+                return
+
+    def reverse_linkList(self):
+        prevNode = None
+        currNode = self.head
+        nextNode = currNode.next
+
+        while True:
+            currNode.next = prevNode
+            # update them
+            prevNode = currNode
+            currNode = nextNode
+            if currNode is None:
+                break
+            nextNode = nextNode.next
+
+
+        return prevNode
+
+    def reverse_recurr(self):
+        if self.head.next is None :
+            return self.head
+        # save the save value
+        save = self.head
+        # iteration done one self.head
+        self.head = self.head.next
+        #newHead capture
+        newHead = self.reverse_recurr()
+        save.next.next = save
+        save.next = None
+        return newHead
 
 
 
@@ -94,18 +168,37 @@ class LinkedList:
 
 myList = LinkedList()
 
+# make list
 for i in range(7):
     myList.insert_at_tail(i)
 
-# myList.print_list()
 
 # myList.insert_at_after_pos(5, 5)
-res = myList.remove_from_pos(2)
-print( f"removed value is {res}")
-myList.print_list()
+# res = myList.remove_from_pos(6)
+# print( f"removed value is {res}")
+# myList.print_list()
+# myList.make_cycle(3)
+# res = myList.detect_cycle()
+# if(res):
+#     print("Cycle detect")
+# else :
+#     print("No cycle")
+#
+# myList.remove_cycle()
+# res1 = myList.detect_cycle()
+# if(res1):
+#     print("Cycle detect")
+# else :
+#     print("No cycle")
+# myList.print_list()
 
-print(myList.find_mid())
-print(myList.size)
+print(myList.head)
+
+myList.head = myList.reverse_recurr()
+myList.print_list()
+print(myList.head)
+# print(myList.find_mid())
+# print("size is ",myList.size)
 
 
 
