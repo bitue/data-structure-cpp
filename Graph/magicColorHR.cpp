@@ -9,11 +9,14 @@ int main (){
     int t ;
     cin>>t ;
     while(t--){
+      
         stack<char> st ;
         int n ;
         cin>>n ;
-        cout<<"Y"<<endl;
-        for(int i =0 ; i<n ; i++){
+        string s ;
+        cin>>s ;
+       // cout<<"Y"<<endl;
+        for(int i =0 ;i< s.length() ; i++){
             char c ;
             cin>>c ;
             if(!st.empty()){

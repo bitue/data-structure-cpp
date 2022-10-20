@@ -154,6 +154,8 @@ class LinkedList:
         self.head = self.head.next
         #newHead capture
         newHead = self.reverse_recurr()
+        # print(newHead.value, "newNode")
+        # print(save.value, "save")
         save.next.next = save
         save.next = None
         return newHead
